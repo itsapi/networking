@@ -1,3 +1,4 @@
+import sys
 import time
 import json
 
@@ -28,8 +29,12 @@ class Net(object):
         # Set status to ready and wait until other connection is ready
         self.putKey('status', 1)
         print('Waiting for connection...')
-        while not int(self.client.get('status')):
-            time.sleep(0.1)
+        try:
+            while not int(self.client.get('status')):
+                time.sleep(0.1)
+        except (ConnectionRefusedError, OSError):
+            print('Unable to connect.')
+            sys.exit()
         print('Connected\n')
 
     def getData(self):
