@@ -5,7 +5,7 @@ import json
 class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
 
     def handle(self):
-        # Processes data and returns to sender
+        # Processes data and returns response to sender
         key = str(self.request.recv(1024), 'ascii')
         f = open('data', 'r')
         data = json.load(f)

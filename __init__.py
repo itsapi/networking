@@ -16,24 +16,30 @@ class Net(object):
             json.dump([], f)
             f.close()
 
+        # Set status to not ready
         self.putKey('status', 0)
 
+        # Start server and client processes
         self.server = Server()
         host = input('Host to connect to: ')
         port = input('Port to connect to: ')
         self.client = Client(host, port)
-        
+
+        # Set status to ready and wait until other connection is ready
         self.putKey('status', 1)
         while not int(self.client.get('status')):
             time.sleep(0.1)
+        print('')
 
     def getData(self):
+        # Return contents of file
         f = open('data', 'r')
         data = json.load(f)
         f.close()
         return data[1:]
 
     def putData(self, data):
+        # Replace contents of file with given object
         f = open('data', 'r')
         oData = json.load(f)
         f.close()
@@ -43,7 +49,8 @@ class Net(object):
         json.dump(data, f)
         f.close()
 
-    def getKey(self, key):        
+    def getKey(self, key):
+        # Return value of particular key from file
         f = open('data', 'r')
         data = json.load(f)
         f.close()
@@ -56,7 +63,8 @@ class Net(object):
 
         return i[1]
 
-    def putKey(self, key, value):        
+    def putKey(self, key, value):
+        # Replace value of particular key or append to file
         f = open('data', 'r')
         data = json.load(f)
         f.close()
