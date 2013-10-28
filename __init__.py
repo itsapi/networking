@@ -9,6 +9,7 @@ class Net(object):
         # Extract data from file
         try:
             f = open('data', 'r')
+            data = json.load(f)
             f.close()
         except:
             f = open('data', 'w')
@@ -56,15 +57,20 @@ class Net(object):
         return i[1]
 
     def putKey(self, key, value):        
-        f = open('data', 'w')
+        f = open('data', 'r')
         data = json.load(f)
+        f.close()
+        f = open('data', 'w')
 
         for x,i in enumerate(data):
             if i[0] == key:
                 break
-        if i[0] == key:
-            data[x] = [key, value]
-        else:
+        try:
+            if i[0] == key:
+                data[x] = [key, value]
+            else:
+                 data.append([key, value])
+        except:
             data.append([key, value])
 
         json.dump(data, f)

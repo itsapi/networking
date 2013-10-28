@@ -13,8 +13,11 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
         for i in data:
             if i[0] == key:
                 break
-        if i[0] != key:
-            i[1] = False
+        try:
+            if i[0] != key:
+                i[1] = False
+        except:
+            i = ['', False]
         response = bytes(str(i[1]), 'ascii')
         self.request.sendall(response)
 
