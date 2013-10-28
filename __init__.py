@@ -6,7 +6,7 @@ from networking.server import *
 from networking.client import *
 
 class Net(object):
-    def __init__(self):
+    def __init__(self, port):
         # Extract data from file
         try:
             f = open('data', 'r')
@@ -21,7 +21,7 @@ class Net(object):
         self.putKey('status', 0)
 
         # Start server and client processes
-        self.server = Server()
+        self.server = Server(port)
         host = input('Host to connect to: ')
         port = input('Port to connect to: ')
         self.client = Client(host, port)

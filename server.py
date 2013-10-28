@@ -25,10 +25,14 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     pass
 
 class Server(object):
-    def __init__(self):
+    def __init__(self, port):
         # Port 0 means to select an arbitrary unused port
         # IP '' means to listen on all interfaces
-        self.server = ThreadedTCPServer(('', 0), ThreadedTCPRequestHandler)
+        try:
+            self.server = ThreadedTCPServer(('', port), ThreadedTCPRequestHandler)
+        except:
+            self.server = ThreadedTCPServer(('', 0), ThreadedTCPRequestHandler)
+
         ip, port = self.server.server_address
 
         print('Port: ' + str(port) + '\n')
