@@ -15,8 +15,6 @@ class Client(object):
             # Atempt to send message to server
             sock.sendall(bytes(data, 'ascii'))
             response = str(sock.recv(1024), 'ascii')
-            print("Received: {}".format(response))
             return response
         finally:
             sock.close()
-            return False

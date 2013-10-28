@@ -1,4 +1,3 @@
-import socket
 import threading
 import socketserver
 import json
@@ -23,14 +22,12 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     pass
 
 class Server(object):
-    def __init__(self, host):
+    def __init__(self):
         # Port 0 means to select an arbitrary unused port
-        HOST, PORT = host, 0
-
-        self.server = ThreadedTCPServer((HOST, PORT), ThreadedTCPRequestHandler)
+        # IP '' means to listen on all interfaces
+        self.server = ThreadedTCPServer(('', 0), ThreadedTCPRequestHandler)
         ip, port = self.server.server_address
-    
-        print('\nIP: ' + ip)
+
         print('Port: ' + str(port) + '\n')
 
         # Start a thread with the server -- that thread will then start one
