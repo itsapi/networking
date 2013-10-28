@@ -35,7 +35,7 @@ class Net(object):
 
         # Set status to ready and wait until other connection is ready
         self.putKey('status', 1)
-        print('Waiting for connection...')
+        print('\nWaiting for connection...')
         try:
             while not int(self.client.get('status')):
                 time.sleep(0.1)
