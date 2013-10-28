@@ -1,3 +1,4 @@
+import sys
 import socket
 
 class Client(object):
@@ -10,7 +11,11 @@ class Client(object):
 
         # Open connection to ip with port
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.connect((self.ip, self.port))
+        try:
+            sock.connect((self.ip, self.port))
+        except:
+            print('Unable to connect.')
+            sys.exit()
         try:
             # Atempt to send message to server
             sock.sendall(bytes(data, 'ascii'))
