@@ -23,7 +23,14 @@ class Net(object):
         # Start server and client processes
         self.server = Server(port)
         host = input('Host to connect to: ')
-        port = input('Port to connect to: ')
+        valid = False
+        while not valid:
+            try:
+                port = int(input('Port to connect to: '))
+                valid = True
+            except ValueError:
+                print('Invalid port')
+                valid = False
         self.client = Client(host, port)
 
         # Set status to ready and wait until other connection is ready
@@ -32,7 +39,7 @@ class Net(object):
         try:
             while not int(self.client.get('status')):
                 time.sleep(0.1)
-        except (ConnectionRefusedError, OSError):
+        except:
             print('Unable to connect.')
             sys.exit()
         print('Connected\n')
