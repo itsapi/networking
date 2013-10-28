@@ -27,9 +27,10 @@ class Net(object):
 
         # Set status to ready and wait until other connection is ready
         self.putKey('status', 1)
+        print('Waiting for connection...')
         while not int(self.client.get('status')):
             time.sleep(0.1)
-        print('')
+        print('Connected\n')
 
     def getData(self):
         # Return contents of file
