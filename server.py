@@ -8,9 +8,12 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
     def handle(self):
         # Processes data and returns response to sender
         key = str(self.request.recv(1024), 'ascii')
-        f = open('data', 'r')
-        data = json.load(f)
-        f.close()
+        data = ''
+        while data == '':
+            with open('data', 'r') as f:
+                if f.readlines():
+                    data = json.load(f)
+
         for i in data:
             if i[0] == key:
                 break

@@ -9,13 +9,11 @@ class Net(object):
     def __init__(self):
         # Extract data from file
         try:
-            f = open('data', 'r')
-            data = json.load(f)
-            f.close()
+            with open('data', 'r') as f
+                data = json.load(f)
         except:
-            f = open('data', 'w')
-            json.dump([], f)
-            f.close()
+            with open('data', 'w') as f:
+                json.dump([], f)
 
         # Set status to not ready
         self.putKey('status', 0)
@@ -42,27 +40,23 @@ class Net(object):
 
     def getData(self):
         # Return contents of file
-        f = open('data', 'r')
-        data = json.load(f)
-        f.close()
+        with open('data', 'r') as f
+            data = json.load(f)
         return data[1:]
 
     def putData(self, data):
         # Replace contents of file with given object
-        f = open('data', 'r')
-        oData = json.load(f)
-        f.close()
+        with open('data', 'r') as f:
+            oData = json.load(f)
         data.insert(0, oData[0])
 
-        f = open('data', 'w')
-        json.dump(data, f)
-        f.close()
+        with open('data', 'w') as f:
+            json.dump(data, f)
 
     def getKey(self, key):
         # Return value of particular key from file
-        f = open('data', 'r')
-        data = json.load(f)
-        f.close()
+        with open('data', 'r') as f:
+            data = json.load(f)
 
         for i in data:
             if i[0] == key:
@@ -74,9 +68,8 @@ class Net(object):
 
     def putKey(self, key, value):
         # Replace value of particular key or append to file
-        f = open('data', 'r')
-        data = json.load(f)
-        f.close()
+        with open('data', 'r') as f:
+            data = json.load(f)
 
         for x,i in enumerate(data):
             if i[0] == key:
@@ -89,6 +82,5 @@ class Net(object):
         except:
             data.append([key, value])
 
-        f = open('data', 'w')
-        json.dump(data, f)
-        f.close()
+        with open('data', 'w') as f:
+            json.dump(data, f)
