@@ -12,6 +12,7 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
         while data == '':
             with open('data', 'r') as f:
                 if f.readlines():
+                    f.seek(0)
                     data = json.load(f)
 
         for i in data:
