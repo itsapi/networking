@@ -9,7 +9,7 @@ class Net(object):
     def __init__(self):
         # Extract data from file
         try:
-            with open('data', 'r') as f
+            with open('data', 'r') as f:
                 data = json.load(f)
         except:
             with open('data', 'w') as f:
@@ -40,7 +40,7 @@ class Net(object):
 
     def getData(self):
         # Return contents of file
-        with open('data', 'r') as f
+        with open('data', 'r') as f:
             data = json.load(f)
         return data[1:]
 
