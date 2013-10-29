@@ -77,7 +77,6 @@ class Net(object):
         f = open('data', 'r')
         data = json.load(f)
         f.close()
-        f = open('data', 'w')
 
         for x,i in enumerate(data):
             if i[0] == key:
@@ -90,5 +89,6 @@ class Net(object):
         except:
             data.append([key, value])
 
+        f = open('data', 'w')
         json.dump(data, f)
         f.close()

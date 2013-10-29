@@ -19,8 +19,8 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
                 i[1] = False
         except:
             i = ['', False]
-        response = bytes(str(i[1]), 'ascii')
-        self.request.sendall(response)
+            
+        self.request.sendall(bytes(str(i[1]), 'ascii'))
 
 class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     pass
