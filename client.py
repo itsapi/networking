@@ -1,8 +1,8 @@
-import sys
 import socket
 
 class Client(object):
-    def __init__(self, ip, port):
+    def __init__(self, ip, port, stop):
+        self.stop = stop
         self.port = int(port)
         self.ip = ip
 
@@ -14,8 +14,7 @@ class Client(object):
         try:
             sock.connect((self.ip, self.port))
         except:
-            print('Unable to connect.')
-            sys.exit()
+            self.stop()
         try:
             # Atempt to send message to server
             sock.sendall(bytes(data, 'ascii'))

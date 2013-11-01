@@ -6,7 +6,7 @@ from networking.server import *
 from networking.client import *
 
 class Net(object):
-    def __init__(self):
+    def __init__(self, stop):
         # Extract data from file
         try:
             with open('data', 'r') as f:
@@ -29,7 +29,7 @@ class Net(object):
             except ValueError:
                 print('Invalid port')
                 valid = False
-        self.client = Client(host, port)
+        self.client = Client(host, port, stop)
 
         # Set status to ready and wait until other connection is ready
         self.putKey('status', 1)
