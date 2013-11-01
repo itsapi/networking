@@ -14,7 +14,7 @@ class Client(object):
         try:
             sock.connect((self.ip, self.port))
         except:
-            self.stop()
+            self.stop('Unable to connect')
         try:
             # Atempt to send message to server
             sock.sendall(bytes(data, 'ascii'))
